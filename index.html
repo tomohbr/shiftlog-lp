@@ -331,20 +331,105 @@
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- CTA + お問い合わせフォーム -->
   <section id="cta" class="py-20 px-4 gradient-hero text-white">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-4">今すぐ無料で始めましょう</h2>
-      <p class="text-blue-100 text-lg mb-8">
-        アカウント作成は30秒。クレジットカードは不要です。<br />
-        1店舗なら、ずっと無料でお使いいただけます。
-      </p>
-      <a href="https://shiftlog-production.up.railway.app/login" class="inline-block gradient-cta text-white text-xl font-bold px-10 py-5 rounded-xl hover:opacity-90 transition shadow-lg">
-        無料でアカウント作成
-      </a>
-      <p class="text-sm text-blue-200 mt-4">1分で完了 / 解約いつでもOK</p>
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">お問い合わせ・お申し込み</h2>
+        <p class="text-blue-100 text-lg">
+          先着10店舗さま限定！初期設定サポート ¥5,000 で導入できます。<br />
+          以下のフォームからお気軽にお問い合わせください。
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-xl p-8 max-w-lg mx-auto">
+        <form class="space-y-5" id="contact-form" onsubmit="return handleFormSubmit(event)">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">お名前 <span class="text-red-500">*</span></label>
+            <input type="text" name="name" required placeholder="山田 太郎" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">店舗名 <span class="text-red-500">*</span></label>
+            <input type="text" name="store_name" required placeholder="居酒屋 やまだ" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">メールアドレス <span class="text-red-500">*</span></label>
+            <input type="email" name="email" required placeholder="example@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">電話番号</label>
+            <input type="tel" name="phone" placeholder="090-1234-5678" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">現在のシフト管理方法 <span class="text-red-500">*</span></label>
+            <select name="current_method" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white">
+              <option value="" disabled selected>選択してください</option>
+              <option value="紙・ホワイトボード">紙・ホワイトボード</option>
+              <option value="Excel・スプレッドシート">Excel・スプレッドシート</option>
+              <option value="Airシフト">Airシフト</option>
+              <option value="その他のアプリ">その他のアプリ</option>
+              <option value="特に使っていない">特に使っていない</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ご質問・ご要望</label>
+            <textarea name="message" rows="3" placeholder="気になることがあればお気軽にどうぞ" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="【シフトログ】新規お問い合わせ" />
+          <input type="hidden" name="_next" value="https://tomohbr.github.io/shiftlog-lp/#thankyou" />
+          <button type="submit" class="w-full gradient-cta text-white text-lg font-bold py-4 rounded-xl hover:opacity-90 transition shadow-lg">
+            送信する（無料）
+          </button>
+          <p class="text-xs text-gray-400 text-center">19:00〜22:00の間にメールでご返信いたします</p>
+        </form>
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="text-blue-200 text-sm mb-3">すでにアカウントをお持ちの方はこちら</p>
+        <a href="https://shiftlog-production.up.railway.app/login" class="inline-block bg-white/20 backdrop-blur-sm text-white font-medium px-8 py-3 rounded-xl hover:bg-white/30 transition">
+          ログイン
+        </a>
+      </div>
     </div>
   </section>
+
+  <!-- Thank you（送信後に表示） -->
+  <section id="thankyou" class="py-20 px-4 hidden">
+    <div class="max-w-lg mx-auto text-center">
+      <div class="text-6xl mb-4">&#10004;</div>
+      <h2 class="text-2xl font-bold mb-4">お問い合わせありがとうございます！</h2>
+      <p class="text-gray-600">19:00〜22:00の間にメールでご返信いたします。<br />しばらくお待ちください。</p>
+    </div>
+  </section>
+  <script>
+  if(location.hash==='#thankyou'){document.getElementById('thankyou').classList.remove('hidden')}
+  function handleFormSubmit(e){
+    e.preventDefault();
+    var f=e.target;
+    var name=f.name.value;
+    var store=f.store_name.value;
+    var email=f.email.value;
+    var phone=f.phone.value||'未記入';
+    var method=f.current_method.value;
+    var msg=f.message.value||'なし';
+    var subject='【シフトログ】新規お問い合わせ: '+store;
+    var body='お名前: '+name+'\n店舗名: '+store+'\nメール: '+email+'\n電話: '+phone+'\n現在のシフト管理: '+method+'\nご要望: '+msg;
+    // メール送信（バックエンドAPI経由）
+    fetch('https://shiftlog-production.up.railway.app/api/contact',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:name,store_name:store,email:email,phone:phone,current_method:method,message:msg})
+    }).then(function(){
+      document.getElementById('contact-form').style.display='none';
+      document.getElementById('thankyou').classList.remove('hidden');
+      document.getElementById('thankyou').scrollIntoView({behavior:'smooth'});
+    }).catch(function(){
+      // フォールバック: mailtoリンク
+      window.location.href='mailto:shibahara.724@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    });
+    return false;
+  }
+  </script>
 
   <!-- FAQ -->
   <section class="py-20 px-4">
@@ -389,7 +474,7 @@
       <h2 class="text-2xl font-bold text-center mb-8">特定商取引法に基づく表記</h2>
       <div class="bg-white rounded-xl border border-gray-200 p-6 text-sm text-gray-700 space-y-3">
         <div class="grid grid-cols-[120px_1fr] gap-2">
-          <span class="font-medium text-gray-900">事業者名</span><span>柴原 朋弥</span>
+          <span class="font-medium text-gray-900">事業者名</span><span>芝原 朋弥</span>
           <span class="font-medium text-gray-900">所在地</span><span>請求があった場合に遅滞なく開示いたします</span>
           <span class="font-medium text-gray-900">連絡先</span><span>shibahara.724@gmail.com（メールにてお問い合わせください）</span>
           <span class="font-medium text-gray-900">販売価格</span><span>フリープラン: 0円/月、プロプラン: 980円/月/店舗（税込）、初期設定サポート: 5,000円（税込）</span>
